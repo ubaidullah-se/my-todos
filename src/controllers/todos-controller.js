@@ -1,15 +1,20 @@
 const Todo = require("../models/Todo");
 
 const createTodo = async (req, res) => {
+  console.log(req.body);
   try {
     await Todo.create({
-      title: "Create a website",
-      description: "lorem ipsum dollar sit",
+      title: req.body.title,
+      description: req.body.description,
     });
   } catch (e) {
     console.error(e.message);
   }
-  res.render("index");
+  res.redirect("/todos");
+};
+
+const todoForm = (_, res) => {
+  res.render("create-todo");
 };
 
 const allTodos = async (req, res) => {
@@ -25,4 +30,5 @@ const allTodos = async (req, res) => {
 module.exports = {
   createTodo,
   allTodos,
+  todoForm,
 };
