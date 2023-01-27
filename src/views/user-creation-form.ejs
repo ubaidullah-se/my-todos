@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/dist/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Todos List</title>
+  </head>
+  <body>
+    <form method="post" action="/sign-in/">
+      <div class="flex flex-col items-center justify-center">
+        <input
+          class="border rounded py-1 px-2 m-2 outline-none w-60 text-sm"
+          type="text"
+          name="full_name"
+          placeholder="Full Name"
+        />
+        <input
+          class="border rounded py-1 px-2 m-2 outline-none w-60 text-sm"
+          type="text"
+          name="email"
+          placeholder="Email"
+        />
+
+        <input
+          class="border rounded py-1 px-2 m-2 outline-none w-60 text-sm"
+          type="text"
+          name="password"
+          placeholder="Password"
+        />
+
+        <input
+          class="cursor-pointer bg-red-500 text-sm text-white w-24 rounded py-1.5"
+          type="submit"
+          value="Singin"
+        />
+      </div>
+    </form>
+  </body>
+</html>

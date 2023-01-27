@@ -1,4 +1,4 @@
-const Todo = require("../models/Todo");
+const Todo = require("../models/todo.model");
 
 const createTodo = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ const createTodo = async (req, res) => {
   res.redirect("/todos");
 };
 
-const allTodos = async (req, res) => {
+const allTodos = async (_, res) => {
   context = {};
   try {
     context.todos = await Todo.find({});
@@ -24,8 +24,8 @@ const allTodos = async (req, res) => {
 
 const updateTodo = async (req, res) => {
   try {
-    let todo = await Todo.findOne({id: req.body.todo_id});
-    console.log(todo)
+    let todo = await Todo.findOne({ id: req.body.todo_id });
+    console.log(todo);
     todo.completed = !todo.completed;
     todo.save();
   } catch (e) {

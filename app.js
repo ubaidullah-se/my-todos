@@ -4,6 +4,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+
+const dotenv = require("dotenv");
+dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 const DB_CONNECTION_STRING = "mongodb://127.0.0.1/myTodo";
@@ -14,7 +18,11 @@ const middlewares = require("./src/middlewares");
 // Using Cors
 app.use(cors());
 
-// Using body-parser
+// Setting Cookie Parser to read and set cookies
+app.use(cookieParser());
+// suthentication middleware
+app.use(middlewares.auth_middleware)
+// Using body-parser to read parameters from request body
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
@@ -27,11 +35,12 @@ app.use(middlewares.morganLogger.production);
 app.use(middlewares.morganLogger.dev);
 
 // Static and Media Paths
-app.use("/static", express.static(__dirname + '/static'));
-app.use("/media", express.static(__dirname + '/media'));
+app.use("/static", express.static(__dirname + "/static"));
+app.use("/media", express.static(__dirname + "/media"));
 
 // All Urls
-app.use("/todos", routes.todos);
+app.use("/", routes.user_routes);
+app.use("/todos", routes.todo_routes);
 
 // Connecting Databse (MongoDB) And Startting app
 mongoose.set("strictQuery", false);
