@@ -47,7 +47,7 @@ const loginUser = async (req, res) => {
     let token = generate_jwt(user.id);
     res.cookie("jwt-token", token);
 
-    res.redirect("/todos");
+    return res.redirect("/todos");
   } catch (e) {
     console.log(e);
   }

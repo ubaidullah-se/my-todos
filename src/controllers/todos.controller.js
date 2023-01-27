@@ -5,6 +5,7 @@ const createTodo = async (req, res) => {
     await Todo.create({
       title: req.body.title,
       description: req.body.description,
+      user: req.user.id,
     });
   } catch (e) {
     console.error(e.message);
@@ -12,10 +13,10 @@ const createTodo = async (req, res) => {
   res.redirect("/todos");
 };
 
-const allTodos = async (_, res) => {
+const allTodos = async (req, res) => {
   context = {};
   try {
-    context.todos = await Todo.find({});
+    context.todos = await Todo.find({ user: req.user.id });
   } catch (e) {
     console.error(e.message);
   }
