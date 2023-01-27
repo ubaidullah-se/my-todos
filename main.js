@@ -26,6 +26,10 @@ app.set("view engine", "ejs");
 app.use(middlewares.morganLogger.production);
 app.use(middlewares.morganLogger.dev);
 
+// Static and Media Paths
+app.use("/static", express.static(__dirname + '/static'));
+app.use("/media", express.static(__dirname + '/media'));
+
 // All Urls
 app.use("/todos", routes.todos);
 

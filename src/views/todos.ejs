@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/dist/styles.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <title>Todos List</title>
+  </head>
+  <body>
+    <form method="post" action="/todos/create-todo/">
+      <div class="flex items-center justify-center">
+        <input
+          class="border rounded py-1 px-2 m-2 outline-none w-60 text-sm"
+          type="text"
+          name="title"
+          placeholder="Title"
+        />
+        <input
+          class="border rounded py-1 px-2 m-2 outline-none w-60 text-sm"
+          type="text"
+          name="description"
+          placeholder="Description"
+        />
+        <input
+          class="cursor-pointer bg-red-500 text-sm text-white w-24 rounded py-1.5"
+          type="submit"
+          value="Add"
+        />
+      </div>
+    </form>
+
+    <div
+      class="max-w-[595px] m-auto mt-8 flex flex-col items-start justify-center"
+    >
+      <% todos.map((item) => { %>
+      <div class="flex justify-between items-center w-full">
+        <div>
+          <h3 class="text-lg font-bold<%= item.completed ? " line-through" : "" %>"><%= item.title %></h3>
+          <p class="<%= item.completed ? " line-through" : "" %>"><%= item.description %></p>
+        </div>
+
+        <div class="flex">
+          <a
+            class="mx-2 cursor-pointer"
+            href="/todos/delete-todo/?todo_id=<%= item.id %>"
+          >
+            <i class="ri-delete-bin-line"></i>
+          </a>
+          <a
+            class="mx-2 cursor-pointer"
+            href="/todos/update-todo/?todo_id=<%= item.id %>"
+          >
+            <i class="ri-checkbox-line"></i>
+          </a>
+        </div>
+      </div>
+      <%}) %>
+    </div>
+  </body>
+</html>

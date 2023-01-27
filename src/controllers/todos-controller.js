@@ -1,7 +1,6 @@
 const Todo = require("../models/Todo");
 
 const createTodo = async (req, res) => {
-  console.log(req.body);
   try {
     await Todo.create({
       title: req.body.title,
@@ -13,10 +12,6 @@ const createTodo = async (req, res) => {
   res.redirect("/todos");
 };
 
-const todoForm = (_, res) => {
-  res.render("create-todo");
-};
-
 const allTodos = async (req, res) => {
   context = {};
   try {
@@ -24,11 +19,33 @@ const allTodos = async (req, res) => {
   } catch (e) {
     console.error(e.message);
   }
-  res.render("all-todos", context);
+  res.render("todos", context);
+};
+
+const updateTodo = async (req, res) => {
+  try {
+    let todo = await Todo.findOne({id: req.body.todo_id});
+    console.log(todo)
+    todo.completed = !todo.completed;
+    todo.save();
+  } catch (e) {
+    console.error(e.message);
+  }
+  res.redirect("/todos");
+};
+
+const deleteTodo = async (req, res) => {
+  try {
+    await Todo.deleteOne(req.body.todo_id);
+  } catch (e) {
+    console.error(e.message);
+  }
+  res.redirect("/todos");
 };
 
 module.exports = {
   createTodo,
   allTodos,
-  todoForm,
+  updateTodo,
+  deleteTodo,
 };
