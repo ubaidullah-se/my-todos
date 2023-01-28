@@ -12,7 +12,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const DB_CONNECTION_STRING = "mongodb://127.0.0.1/myTodo";
 
-const routes = require("./src/routes");
+const controllers = require("./src/controllers");
 const middlewares = require("./src/middlewares");
 
 // Using Cors
@@ -39,8 +39,8 @@ app.use("/static", express.static(__dirname + "/static"));
 app.use("/media", express.static(__dirname + "/media"));
 
 // All Urls
-app.use("/", routes.user_routes);
-app.use("/todos", routes.todo_routes);
+app.use("/", controllers.user_controller);
+app.use("/todos", controllers.todo_controller);
 
 // Connecting Databse (MongoDB) And Startting app
 mongoose.set("strictQuery", false);

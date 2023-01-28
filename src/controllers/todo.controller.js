@@ -7,7 +7,7 @@ const {
   updateTodo,
   deleteTodo,
   allTodos,
-} = require("../controllers/todos.controller");
+} = require("../services/todos.service");
 
 router.get("/", userLogined, allTodos);
 router.post("/create-todo", userLogined, createTodo);
